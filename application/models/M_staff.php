@@ -17,4 +17,12 @@ class M_staff extends CI_Model{
             return $query->result();
         }
     }
+
+    function insert_staff($data_insert){
+        $this->db->insert('staff',$data_insert);
+
+        $insert_id = $this->db->insert_id();
+
+        return $insert_id;
+    }
 }

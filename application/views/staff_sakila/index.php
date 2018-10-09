@@ -21,6 +21,10 @@
 
 <div class="container">
   <h2>Senarai Staff Sakila</h2>
+  <a href="<?= site_url('staffsakila/create') ?>" class="btn btn-primary" data-toggle="tooltip" 
+  data-placement="top" title="Create Staff">
+  Create
+  </a>
   <table class="table">
     <thead>
       <tr>
