@@ -35,4 +35,9 @@ class M_staff extends CI_Model{
         $this->db->where(['staff_id' => $staffid]);
         $this->db->update('staff', $data_update);
     }
+
+    function delete_staff($staffid){
+        $this->db->where(['staff_id' => $staffid]);
+        $this->db->delete('staff');
+    }
 }

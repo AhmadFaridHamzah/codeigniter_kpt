@@ -40,7 +40,10 @@
                 <td><?php echo $index->first_name ?></td>
                 <td><?= $index->last_name ?></td>
                 <td><?= $index->email ?></td>
-                <td><a href="<?=site_url('staffsakila/update/'.$index->staff_id)?>">Update</a></td>
+                <td>
+                  <a class="btn btn-info" href="<?=site_url('staffsakila/update/'.encryptUrl($index->staff_id))?>">Update</a>
+                  <a class="btn btn-danger" href="<?=site_url('staffsakila/delete/'.encryptUrl($index->staff_id))?>" onclick="return confirm('Anda Pasti?');">Delete</a>
+                </td>
             </tr>
         <?php } ?>
     </tbody>

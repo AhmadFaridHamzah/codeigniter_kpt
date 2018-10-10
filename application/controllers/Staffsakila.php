@@ -73,7 +73,7 @@ class Staffsakila extends CI_Controller{
             $this->M_staff->update($this->input->post('staff_id'), $data_update);
             redirect('staffsakila/index');
         }
-            
+        $staffid = decyrptUrl($staffid);   
         $staff = $this->M_staff->get_staff_byid($staffid);
         // echo '<pre>';
         // print_r($staff);
@@ -81,8 +81,21 @@ class Staffsakila extends CI_Controller{
         $this->load->view('staff_sakila/update', $data);
     }
 
-    public function updateprocess(){
+    public function delete($staffid){
+        $staffid = decryptUrl($staffid);
+        $this->M_staff->delete_staff($staffid);
+        redirect('staffsakila/index');
+    }
 
+    public function test(){
+        // echo 'atas';
+        // echo encryptUrl('1');
+        $str = 'ayam';
+        echo $str.'<br>';
+        $ciphertext = encryptUrl($str);
+        echo $ciphertext.'<br>';
+        $decstr = decryptUrl($ciphertext);
+        echo $decstr.'<br>';
     }
 
 
