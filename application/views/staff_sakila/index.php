@@ -31,7 +31,7 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
-        <!-- <th>Email</th> -->
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -40,6 +40,7 @@
                 <td><?php echo $index->first_name ?></td>
                 <td><?= $index->last_name ?></td>
                 <td><?= $index->email ?></td>
+                <td><a href="<?=site_url('staffsakila/update/'.$index->staff_id)?>">Update</a></td>
             </tr>
         <?php } ?>
     </tbody>

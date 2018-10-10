@@ -25,4 +25,14 @@ class M_staff extends CI_Model{
 
         return $insert_id;
     }
+
+    function get_staff_byid($staffid){
+        $query = $this->db->get_where('staff', ['staff_id' => $staffid]);
+        return $query->row();
+    }
+
+    function update($staffid, $data_update){
+        $this->db->where(['staff_id' => $staffid]);
+        $this->db->update('staff', $data_update);
+    }
 }

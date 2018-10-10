@@ -56,10 +56,34 @@ class Staffsakila extends CI_Controller{
 
 
         }
-
-        
+ 
     }
 
+    public function update($staffid = 0){
+
+        if($this->input->post()){
+            // print_r($this->input->post());
+            // die();
+            $data_update = [
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'email' => $this->input->post('email'),
+            ];
+
+            $this->M_staff->update($this->input->post('staff_id'), $data_update);
+            redirect('staffsakila/index');
+        }
+            
+        $staff = $this->M_staff->get_staff_byid($staffid);
+        // echo '<pre>';
+        // print_r($staff);
+        $data['staff'] = $staff;
+        $this->load->view('staff_sakila/update', $data);
+    }
+
+    public function updateprocess(){
+
+    }
 
 
 }
