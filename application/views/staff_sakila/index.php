@@ -16,9 +16,20 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
-
+<?php
+  $msg = $this->session->flashdata('msg');
+  if(isset($msg)){
+    @list($class, $message) = explode("%",$msg);
+    // echo '<div class="alert alert-'.$class.'">';
+    // echo '<button type="button" class="close" data-dismiss="alert">x</button>';
+    // echo $message;
+    // echo'</div>';
+    echo "<script> $(document).ready(function(){alert('".$message."','".$class."');}); </script>";
+  }
+?>
 <div class="container">
   <h2>Senarai Staff Sakila</h2>
   <a href="<?= site_url('staffsakila/create') ?>" class="btn btn-primary" data-toggle="tooltip" 
@@ -42,7 +53,7 @@
                 <td><?= $index->email ?></td>
                 <td>
                   <a class="btn btn-info" href="<?=site_url('staffsakila/update/'.encryptUrl($index->staff_id))?>">Update</a>
-                  <a class="btn btn-danger" href="<?=site_url('staffsakila/delete/'.encryptUrl($index->staff_id))?>" onclick="return confirm('Anda Pasti?');">Delete</a>
+                  <a class="btn btn-danger" href="#" data-url="<?=site_url('staffsakila/delete/'.encryptUrl($index->staff_id))?>" onclick="return confirm_delete(this);">Delete</a>
                 </td>
             </tr>
         <?php } ?>
@@ -52,3 +63,30 @@
 
 </body>
 </html>
+
+<script>
+  function alert(msg, alertclass){
+    swal({
+    title: "Makluman!",
+    text: msg,
+    icon: alertclass,
+    });
+  }
+
+function confirm_delete(identifier){
+  swal({
+    title: "Anda Pasti?",
+    text: "Anda Pasti?Data akan dihapus",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+    })
+    .then((isConfirm) => {
+    if (isConfirm) {
+      var url = $(identifier).data('url');
+      window.location.href = url;
+    } 
+  });
+}
+
+</script>

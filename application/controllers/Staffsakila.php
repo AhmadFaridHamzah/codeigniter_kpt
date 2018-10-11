@@ -51,10 +51,12 @@ class Staffsakila extends CI_Controller{
             $insert = $this->M_staff->insert_staff($data_insert);
 
             if(!empty($insert)){
-                redirect('staffsakila/index');
+                $this->session->set_flashdata("msg", "success%Staff berjaya didaftar");
+                // $this->session->set_flashdata("success", true);
+            }else{
+                $this->session->set_flashdata("msg", "error%Staff tidak berjaya didaftarkan");
             }
-
-
+            redirect('staffsakila/index');
         }
  
     }
@@ -71,6 +73,7 @@ class Staffsakila extends CI_Controller{
             ];
 
             $this->M_staff->update($this->input->post('staff_id'), $data_update);
+            $this->session->set_flashdata("msg", "success%Staff berjaya dikemaskini");
             redirect('staffsakila/index');
         }
         $staffid = decyrptUrl($staffid);   
@@ -84,6 +87,7 @@ class Staffsakila extends CI_Controller{
     public function delete($staffid){
         $staffid = decryptUrl($staffid);
         $this->M_staff->delete_staff($staffid);
+        $this->session->set_flashdata("msg", "success%Staff berjaya dipadam");
         redirect('staffsakila/index');
     }
 
@@ -96,6 +100,22 @@ class Staffsakila extends CI_Controller{
         echo $ciphertext.'<br>';
         $decstr = decryptUrl($ciphertext);
         echo $decstr.'<br>';
+    }
+
+    public function demoquery(){
+
+        $staffobject = $this->M_staff->demo_object();
+        $staffarray = $this->M_staff->demo_array();
+        $staffcond = $this->M_staff->democondition();
+        echo '<pre>';
+        echo 'object : ';
+        print_r($staffobject[3]->first_name);
+        echo '<br>';
+        echo 'array : ';
+        print_r($staffarray[3]['first_name']);
+        echo '<br>';
+        echo 'condition : ';
+        print_r($staffcond);
     }
 
 
