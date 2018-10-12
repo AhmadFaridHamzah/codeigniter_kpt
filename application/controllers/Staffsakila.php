@@ -10,14 +10,17 @@ class Staffsakila extends CI_Controller{
     }
 
     public function index(){
+
         $data['staff'] = $this->M_staff->list_all_staff();
 
+        $dataLayout['navbar'] = $this->load->view('layout/navbar','',true);
+        $dataLayout['content'] = $this->load->view('staff_sakila/index',$data,true);
         // echo "<pre>";
         // print_r($data);
         // echo "</pre>";
         // die();
 
-        $this->load->view('staff_sakila/index',$data);
+        $this->load->view('layout/main',$dataLayout);
     }
 
     public function create(){
@@ -30,7 +33,9 @@ class Staffsakila extends CI_Controller{
         $this->form_validation->set_message('required', 'Ruangan %s ini wajib di isi');
 
         if($this->form_validation->run() == FALSE){
-            $this->load->view('staff_sakila/create_form');
+            $dataLayout['navbar'] = $this->load->view('layout/navbar','',true);
+            $dataLayout['content'] = $this->load->view('staff_sakila/create_form','',true);
+            $this->load->view('layout/main',$dataLayout);
         }else{
 
             // print_r($this->input->post());
@@ -81,7 +86,11 @@ class Staffsakila extends CI_Controller{
         // echo '<pre>';
         // print_r($staff);
         $data['staff'] = $staff;
-        $this->load->view('staff_sakila/update', $data);
+        
+        $dataLayout['navbar'] = $this->load->view('layout/navbar','',true);
+        $dataLayout['content'] = $this->load->view('staff_sakila/update',$data,true);
+
+        $this->load->view('layout/main',$dataLayout);
     }
 
     public function delete($staffid){

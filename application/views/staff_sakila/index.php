@@ -1,25 +1,4 @@
 <?php
-    // echo "<pre>";
-    //     print_r($staff);
-    //     print_r($title);
-    //     echo "</pre>";
-        //var_dump($data);
-        // die();
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-</head>
-<body>
-<?php
   $msg = $this->session->flashdata('msg');
   if(isset($msg)){
     @list($class, $message) = explode("%",$msg);
@@ -30,7 +9,7 @@
     echo "<script> $(document).ready(function(){alert('".$message."','".$class."');}); </script>";
   }
 ?>
-<div class="container">
+
   <h2>Senarai Staff Sakila</h2>
   <a href="<?= site_url('staffsakila/create') ?>" class="btn btn-primary" data-toggle="tooltip" 
   data-placement="top" title="Create Staff">
@@ -59,10 +38,6 @@
         <?php } ?>
     </tbody>
   </table>
-</div>
-
-</body>
-</html>
 
 <script>
   function alert(msg, alertclass){
