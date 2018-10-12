@@ -76,7 +76,7 @@ class Staffsakila extends CI_Controller{
             $this->session->set_flashdata("msg", "success%Staff berjaya dikemaskini");
             redirect('staffsakila/index');
         }
-        $staffid = decyrptUrl($staffid);   
+        $staffid = decryptUrl($staffid);   
         $staff = $this->M_staff->get_staff_byid($staffid);
         // echo '<pre>';
         // print_r($staff);
@@ -107,6 +107,9 @@ class Staffsakila extends CI_Controller{
         $staffobject = $this->M_staff->demo_object();
         $staffarray = $this->M_staff->demo_array();
         $staffcond = $this->M_staff->democondition();
+        $staffdirect = $this->M_staff->demodirectquery();
+        $staffjoin = $this->M_staff->demojoin();
+        
         echo '<pre>';
         echo 'object : ';
         print_r($staffobject[3]->first_name);
@@ -116,6 +119,12 @@ class Staffsakila extends CI_Controller{
         echo '<br>';
         echo 'condition : ';
         print_r($staffcond);
+        echo '<br>';
+        echo 'direct : ';
+        print_r($staffdirect);
+        echo '<br>';
+        echo 'join : ';
+        print_r($staffjoin);
     }
 
 
